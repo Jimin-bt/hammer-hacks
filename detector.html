@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyberbullying Awareness</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .chat-container {
+            width: 90%;
+            max-width: 600px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333333;
+            margin-bottom: 20px;
+        }
+
+        .chat-box {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        textarea {
+            flex: 1;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+            resize: none;
+            height: 60px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .chat-log {
+            margin-top: 20px;
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #cccccc;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .chat-message {
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            word-wrap: break-word;
+        }
+
+        .chat-message.user {
+            background-color: #d1ecf1;
+            text-align: right;
+        }
+
+        .chat-message.bot {
+            background-color: #f8d7da;
+            text-align: left;
+        }
+
+        .chat-message.support {
+            background-color: #d4edda;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .warning {
+            color: red;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .block-message {
+            color: green;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        #blockBtn {
+            background-color: #ff5722;
+            margin-top: 10px;
+        }
+
+        #blockBtn:hover {
+            background-color: #e64a19;
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <h1>Joseph Lorey 💬 </h1>
+        <div class="chat-log" id="chatLog">
+            <!-- Initial Bot Message -->
+            <div class="chat-message bot">Are you the dude I met on Fortnite?</div>
+        </div>
+        <div class="chat-box">
+            <textarea id="userInput" placeholder="Type your message..."></textarea>
+            <button id="sendBtn" onclick="sendMessage()">Send</button>
+        </div>
+        <div id="warning" class="warning"></div>
+        <div id="blockMessage" class="block-message"></div>
+        <div id="blockButtonContainer" class="button-container" style="display: none;">
+            <button id="blockBtn" onclick="blockUser()">Block User</button>
+        </div>
+    </div>
+
+    <script>
+        // Define harmful responses and messages
+        const harmfulResponses = [
+            "You look like a mess.",
+            "No one cares about your opinion.",
+            "You're such a loser, no one will miss you.",
+            "Why are you even bothering to talk to me? You're worthless."
+        ];
+
+        const supportiveMessages = [
+            "Remember, you are valued. Don't listen to negativity. 💖",
+            "Cyberbullying is never okay. You are stronger than these words. 💪",
+            "Stay strong. Words can hurt, but they don't define you. 🌟",
+            "You are amazing just the way you are. Don't let anyone tell you otherwise! ❤️"
+        ];
+
+        let hateMessageCount = 0;
+        let isBlocked = false;
+
+        function sendMessage() {
+            const userInput = document.getElementById("userInput").value.trim().toLowerCase();
+            const chatLog = document.getElementById("chatLog");
+            const warningDiv = document.getElementById("warning");
+            const blockMessageDiv = document.getElementById("blockMessage");
+            const blockButtonContainer = document.getElementById("blockButtonContainer");
+
+            // Clear any previous warning or block messages
+            warningDiv.textContent = "";
+            blockMessageDiv.textContent = "";
+
+            if (!userInput) {
+                alert("Please type a message before sending.");
+                return;
+            }
+
+            // Add user's message to chat log
+            const userMessage = document.createElement("div");
+            userMessage.className = "chat-message user";
+            userMessage.textContent = userInput;
+            chatLog.appendChild(userMessage);
+
+            // If the user is blocked, stop processing further
+            if (isBlocked) {
+                return;
+            }
+
+            // Simulate mean response from the other person (bot)
+            const botMessage = document.createElement("div");
+            botMessage.className = "chat-message bot";
+            const botResponse = pickRandom(harmfulResponses);
+            botMessage.textContent = botResponse;
+            chatLog.appendChild(botMessage);
+
+            // Check if bot's message is harmful
+            if (harmfulResponses.includes(botResponse)) {
+                hateMessageCount++;
+            }
+
+            // After 2 hate messages, show the block button
+            if (hateMessageCount >= 2) {
+                showBlockButton();
+            }
+
+            // Display the supportive warning message
+            warningDiv.textContent = "⚠️ Be cautious of cyberbullying. You are strong and valued. Ignore the negativity!";
+            warningDiv.className = "warning";
+
+            // Add supportive message to chat log
+            const supportMessage = document.createElement("div");
+            supportMessage.className = "chat-message support";
+            supportMessage.textContent = pickRandom(supportiveMessages);
+            chatLog.appendChild(supportMessage);
+
+            // Clear input and scroll to bottom
+            document.getElementById("userInput").value = "";
+            chatLog.scrollTop = chatLog.scrollHeight;
+        }
+
+        // Function to pick a random item from an array
+        function pickRandom(array) {
+            return array[Math.floor(Math.random() * array.length)];
+        }
+
+        // Show block button after 2 hate messages
+        function showBlockButton() {
+            const blockButtonContainer = document.getElementById("blockButtonContainer");
+            blockButtonContainer.style.display = "block";
+        }
+
+        // Block the user when button is clicked
+        function blockUser() {
+            isBlocked = true;
+            const blockMessageDiv = document.getElementById("blockMessage");
+            blockMessageDiv.textContent = "You have blocked the user and will no longer receive messages.";
+
+            // Disable the input and send button
+            document.getElementById("userInput").disabled = true;
+            document.getElementById("sendBtn").disabled = true;
+
+            // Hide block button after blocking
+            document.getElementById("blockButtonContainer").style.display = "none";
+        }
+    </script>
+</body>
+</html>

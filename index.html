@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Cyberbullying Website</title>
+    <style>
+        /* Reset margin and padding */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Verdana', sans-serif;
+            background-color: #e4ffe1;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.5em;
+            color: #2a7f62; /* Soothing green */
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 1.6em;
+            color: #2a7f62; /* Soothing green */
+            margin-bottom: 10px;
+            margin-top: 20px;
+        }
+
+        h3 {
+            text-align: center;
+            font-size: 2.25em;
+            color: #2a7f62; /* Soothing green */
+            margin-bottom: -25px;
+            margin-top: 110px;
+        }
+
+        p {
+            text-align: center;
+            font-size: 1.2em;
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        img {
+            display: block;
+            margin: 0 auto;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 10px;
+        }
+
+        blockquote {
+            font-style: italic;
+            font-size: 1.5em;
+            text-align: center;
+            color: #777;
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #e8f4f1;
+            border-left: 5px solid #2a7f62;
+            width: 70%;
+            margin: 2px auto;
+        }
+
+        button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            background-color: #2a7f62;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #217f4b;
+        }
+
+        /* Section for youth challenges content */
+        .challenges {
+            background-color: #fff;
+            padding: 20px;
+            margin-top: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .challenges h2 {
+            font-size: 2em;
+            color: #2a7f62;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .challenges ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .challenges ul li {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            color: #555;
+        }
+
+        /* Footer with quick links */
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 1em;
+            color: #777;
+        }
+
+        footer a {
+            color: #2a7f62;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        footer b {
+            color: #2a7f62;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+
+</head>
+
+<body>
+    <h1>Cyber Buddy</h1>
+    <button onclick="aboutUs()">About Us</button>
+    <blockquote>"..."</blockquote>
+    <button onclick="Next()">NEXT</button>
+    <h1>"A trustworthy buddy helping youth overcome challenges"</h1>
+
+    <img src="https://www.saasyan.com/hubfs/Blog%20images%20%281%29.png" alt="Cyberbullying Image">
+    <h2>Daily Motivational Quote</h2>
+    <blockquote>"Tough times never last, but tough people do."</blockquote>
+
+    <!-- Section on youth challenges -->
+    <div class="challenges">
+        <h2>Challenges for Today's Youth</h2>
+        <ul>
+            <li> - Cyberbullying and online harassment</li>
+            <li> - Pressure to maintain a perfect social media image</li>
+            <li> - Mental health struggles, including anxiety and depression</li>
+            <li> - Peer pressure and the need to fit in</li>
+            <li> - Academic and career uncertainty</li>
+        </ul>
+    </div>
+        <h3>DOWNLOAD NOW!</h3>
+    <footer>
+        <!-- Hyperlink to the next page -->
+        <p><a href="detector.html">--------------->      Test Our Product Here      <---------------</a></p>
+        <p>&copy; 2024 Cyberbullying Awareness.</p>
+        <p><a href="#">Privacy Policy</a> | <a href="#">Contact</a></p>
+    </footer>
+       <blockquote>"Kids Help Phone -> 1-800-668-6868"</blockquote>
+    <script>
+        var index = 0;
+        
+        function aboutUs() {
+            var quotes = [
+                `Nearly 42% of kids have been bullied online and almost one in four have had it happen more than once. Among this percentage, being ignored and disrespected were the most common forms of cyberbullying.`
+            ];
+
+            var blockquote = document.querySelector("blockquote");
+            blockquote.innerHTML = quotes[index];
+        }
+
+        function Next() {
+            var quotes = [
+                `Cyber Buddy is a project developed to reduce cyberbullying among mainly youths.`
+            ];
+
+            var blockquote = document.querySelector("blockquote");
+            blockquote.innerHTML = quotes[index];
+        }
+    </script>
+
+</body>
+
+</html>
